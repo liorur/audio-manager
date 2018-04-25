@@ -1,0 +1,27 @@
+{
+  "transform": {
+    "\\.(ts|tsx)$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+  },
+  "testRegex": "/test/.*\\.spec\\.(ts|tsx)$",
+  "moduleFileExtensions": [
+    "ts",
+    "tsx",
+    "js"
+  ],
+  "globals": {
+    "ts-jest": {
+      "tsConfigFile": "./src/client/tsconfig.json"
+    }
+  },
+  "coverageReporters": [
+    "html",
+    "text",
+    "text-summary"
+  ],
+  "collectCoverageFrom": [
+    "src/**/*.ts"
+  ],
+  "displayName": "Server",
+  "testEnvironment": "node",
+  "setupTestFrameworkScriptFile": "<rootDir>/test/jest-setup.ts"
+}

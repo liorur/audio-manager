@@ -1,0 +1,127 @@
+{
+  "name": "audio-manager",
+  "version": "0.0.0",
+  "description": "Manage your podcasts and Youtube audio files",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm run lint && jest",
+    "test:verbose": "npm run lint && jest --verbose --coverage",
+    "test:watch": "jest --watchAll --verbose",
+    "lint": "tslint -t stylish -c tslint.json 'src/**/*.ts' 'src/**/*.tsx'",
+    "clean": "rimraf dist",
+    "start_": "node ./dist/server/app.ts",
+    "start:prod": "cross-env NODE_ENV=production node ./dist/server/app.js",
+    "build-client": "cd ./src/client && cross-env NODE_ENV=production webpack --display-modules --progress --colors",
+    "dev-client": "cd ./src/client && webpack-dev-server -w",
+    "build-server": "tsc -p ./src/server",
+    "dev-server": "tsc-watch -p ./src/server --onSuccess \"node ./dist/server/app.js\"",
+    "dev": "npm run clean && concurrently --prefix \"[{name}]\" --names \"SERVER,CLIENT\" -c \"bgBlue.bold,bgMagenta.bold\" \"npm run dev-server\" \"npm run dev-client\"",
+    "start": "npm run clean && concurrently --prefix \"[{name}]\" --names \"SERVER,CLIENT\" -c \"bgBlue.bold,bgMagenta.bold\" \"npm run dev-server\" \"npm run dev-client\"",
+    "build": "npm run clean && concurrently --prefix \"[{name}]\" --names \"SERVER,CLIENT\" -c \"bgBlue.bold,bgMagenta.bold\" \"npm run build-server\" \"npm run build-client\""
+  },
+  "author": "Lior Ur",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/enzyme": "^2.7.9",
+    "@types/i18next": "^8.4.3",
+    "@types/jest": "^20.0.1",
+    "@types/react": "16.0.36",
+    "@types/react-dom": "^16.0.5",
+    "@types/react-i18next": "^4.0.0",
+    "awesome-typescript-loader": "^4.0.1",
+    "babel-polyfill": "^6.26.0",
+    "concurrently": "^3.5.1",
+    "cross-env": "^5.1.4",
+    "css-loader": "^0.28.11",
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
+    "file-loader": "^1.1.11",
+    "gulp-tslint": "^8.1.3",
+    "html-webpack-plugin": "^3.2.0",
+    "jest": "^22.4.3",
+    "jest-environment-node": "^22.4.3",
+    "nock": "^9.2.5",
+    "open-browser-webpack-plugin": "0.0.5",
+    "path": "^0.12.7",
+    "react-test-wrappers": "^1.0.21",
+    "really-need": "^1.9.2",
+    "rimraf": "^2.6.2",
+    "style-loader": "^0.20.3",
+    "supertest": "^3.0.0",
+    "ts-jest": "^22.4.4",
+    "ts-loader": "^4.2.0",
+    "tsc-watch": "^1.0.21",
+    "tslint": "^5.9.1",
+    "tslint-consistent-codestyle": "^1.13.0",
+    "tslint-eslint-rules": "^5.1.0",
+    "typescript": "^2.8.3",
+    "url-loader": "^1.0.1",
+    "webpack": "^4.6.0",
+    "webpack-cli": "^2.0.15",
+    "webpack-dev-server": "^3.1.3",
+    "wix-eventually": "^2.2.0"
+  },
+  "dependencies": {
+    "admin-lte": "^2.4.3",
+    "axios": "^0.18.0",
+    "build-url": "^1.1.1",
+    "debounce-promise": "^3.1.0",
+    "mobx": "^4.2.0",
+    "mobx-react": "^5.0.0",
+    "react": "^16.3.2",
+    "react-dom": "^16.3.2"
+  },
+  "jest": {
+    "projects": [
+      "<rootDir>/jest.client.config.json",
+      "<rootDir>/jest.server.config.json"
+    ]
+  },
+  "jest2": {
+    "transform": {
+      "\\.(ts|tsx)$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+    },
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js"
+    ],
+    "globals": {
+      "ts-jest": {
+        "tsConfigFile": "./src/client/tsconfig.json"
+      }
+    },
+    "projects": [
+      {
+        "displayName": "Client",
+        "testMatch": [
+          "<rootDir>/src/**/*.spec.ts"
+        ],
+        "setupTestFrameworkScriptFile": "<rootDir>/test/jest-setup.ts"
+      },
+      {
+        "displayName": "Server",
+        "testMatch": [
+          "<rootDir>/test/**/*.spec.js"
+        ]
+      }
+    ]
+  },
+  "jest1": {
+    "transform": {
+      "\\.(ts|tsx)$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+    },
+    "testRegex": "/src/.*\\.spec\\.(ts|tsx)$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js"
+    ],
+    "globals": {
+      "ts-jest": {
+        "tsConfigFile": "./src/client/tsconfig.json"
+      }
+    },
+    "setupTestFrameworkScriptFile": "<rootDir>/test/jest-setup.ts"
+  }
+}
